@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply bg-lskin-bg text-lskin-text font-montserrat;
+    @apply bg-lskin-bg  text-lskin-text font-montserrat;
   }
   
   h1, h2, h3, h4, h5, h6 {
