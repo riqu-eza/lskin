@@ -1,9 +1,8 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Leaf, Package, Droplets, TreePine } from 'lucide-react';
+import {  Leaf, Package, Droplets, TreePine } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 const impactStats = [
   { 

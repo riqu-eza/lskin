@@ -3,19 +3,19 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ShoppingBag, Heart, ArrowRight, Star, Sparkles } from 'lucide-react';
+import { ShoppingBag, Heart,  Star, Sparkles } from 'lucide-react';
 import Image from 'next/image';
 
 const FeaturedProductsGrid = ({ products = [] }) => {
-  const [hoveredProduct, setHoveredProduct] = useState(null);
-  const [wishlist, setWishlist] = useState([]);
+  const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
+  const [wishlist, setWishlist] = useState<number[]>([]);
 
   const defaultProducts = [
     {
       id: 1,
       name: "Botanical Renewal Oil",
-      category: "LUXURY SERUM",
-      price: 78,
+      category: "Shear Butter",
+      price: 7800,
       rating: 4.9,
       description: "Potent botanical extract serum for luminous skin",
       image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&h=800&fit=crop",
@@ -24,8 +24,8 @@ const FeaturedProductsGrid = ({ products = [] }) => {
     {
       id: 2,
       name: "Earth-Bound Cleansing Balm",
-      category: "CLEANSER",
-      price: 54,
+      category: "Cocoaa Butter",
+      price: 5400,
       rating: 4.7,
       description: "Gentle cleansing that transforms on contact",
       image: "https://images.unsplash.com/photo-1556228578-9c360e1d8d34?w=800&h=800&fit=crop",
@@ -35,7 +35,7 @@ const FeaturedProductsGrid = ({ products = [] }) => {
       id: 3,
       name: "Flora Hydrating Mist",
       category: "TONER",
-      price: 42,
+      price: 4200,
       rating: 4.8,
       description: "Fine mist hydration with rose and hyaluronic acid",
       image: "https://images.unsplash.com/photo-1591088398332-8a7791972843?w=800&h=800&fit=crop",
@@ -45,7 +45,7 @@ const FeaturedProductsGrid = ({ products = [] }) => {
       id: 4,
       name: "Sculpting Jade Tool",
       category: "BEAUTY TOOL",
-      price: 35,
+      price: 3500,
       rating: 4.9,
       description: "Handcrafted jade for facial massage",
       image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&h=800&fit=crop",
@@ -55,7 +55,7 @@ const FeaturedProductsGrid = ({ products = [] }) => {
 
   const displayProducts = products.length > 0 ? products : defaultProducts;
 
-  const toggleWishlist = (id) => {
+  const toggleWishlist = (id: number) => {
     setWishlist(prev =>
       prev.includes(id)
         ? prev.filter(item => item !== id)
@@ -126,7 +126,7 @@ Essentials    </p>
                     )}
                     {product.isVegan && (
                       <span className="px-3 py-1.5 bg-lskin-secondary text-white text-xs font-bold tracking-widest rounded-full">
-                        VEGAN
+                        BUTTER
                       </span>
                     )}
                   </div>
@@ -190,7 +190,7 @@ Essentials    </p>
                   <div className="flex items-center justify-between pt-4 border-t border-lskin-secondary/10">
                     <div>
                       <span className="text-2xl font-playfair font-bold text-lskin-primary">
-                        ${product.price}
+                        Ksh{product.price}
                       </span>
                     </div>
                     
