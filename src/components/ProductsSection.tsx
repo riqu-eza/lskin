@@ -1,105 +1,155 @@
-'use client';
+"use client";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { 
+  ArrowRight, 
+  Star, 
+  Award, 
+  Sparkles,
+  CheckCircle,
+  Heart,
+  ShoppingBag
+} from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { useState } from 'react';
-import ProductCard from './ProductCard';
+const featuredProducts = [
+  {
+    id: 'prod_001',
+    name: 'Ultra Hydrating Shea Butter',
+    category: 'Body Care',
+    tagline: '24-hour deep hydration with organic shea & cocoa butter',
+    price: 38.00,
+    rating: 4.9,
+    imageUrl: 'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=800&q=80',
+    features: ['Waterless Formula', 'Refillable Packaging', 'Vegan', 'Cruelty Free']
+  },
+  {
+    id: 'prod_002',
+    name: 'Glow Radiance Body Oil',
+    category: 'Body Care',
+    tagline: 'Lightweight, fast-absorbing oil for luminous skin',
+    price: 42.00,
+    rating: 4.8,
+    imageUrl: 'https://images.unsplash.com/photo-1601063458289-77247ba485ec?auto=format&fit=crop&w=800&q=80',
+    features: ['Fast Absorbing', 'Multi-Use', 'Vegan', 'Non-Greasy']
+  }
+];
 
-const ProductsSection = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
-  
-  const categories = [
-    { id: 'all', name: 'All Products' },
-    { id: 'face', name: 'Face Care' },
-    { id: 'body', name: 'Body Care' },
-    { id: 'serums', name: 'Serums' },
-    { id: 'kits', name: 'Wellness Kits' },
-  ];
-  
-  const products = [
-    {
-      id: 1,
-      name: 'Organic Lavender Serum',
-      category: 'Serums',
-      price: 42.99,
-      imageUrl: '/products/serum.jpg',
-      isEco: true,
-    },
-    {
-      id: 2,
-      name: 'Green Tea Cleanser',
-      category: 'Face Care',
-      price: 28.50,
-      imageUrl: '/products/cleanser.jpg',
-      isEco: true,
-    },
-    {
-      id: 3,
-      name: 'Aloe Vera Body Lotion',
-      category: 'Body Care',
-      price: 35.00,
-      imageUrl: '/products/lotion.jpg',
-      isEco: true,
-    },
-    {
-      id: 4,
-      name: 'Sustainable Wellness Kit',
-      category: 'Wellness Kits',
-      price: 89.99,
-      imageUrl: '/products/kit.jpg',
-      isEco: true,
-    },
-  ];
-
+export default function ProductIntro() {
   return (
-    <section className="section-padding py-16">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-4">
-            Our <span className="text-lskin-primary">Products</span>
-          </h2>
-          <p className="text-xl text-lskin-text/70 max-w-3xl mx-auto">
-            Discover our range of high-quality, organic skincare products formulated with sustainability in mind.
+    <section className="py-16 md:py-24 lg:py-32 bg-lskin-bg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 mb-4">
+            <div className="w-8 h-px bg-lskin-primary/30"></div>
+            <Sparkles className="w-4 h-4 text-lskin-primary" />
+            <span className="text-xs tracking-widest uppercase text-lskin-primary/60">
+              Featured Products
+            </span>
+          </div>
+          
+          <h1 className="font-playfair text-4xl md:text-5xl text-lskin-primary font-light mb-4">
+            Our Signature Collection
+          </h1>
+          
+          <p className="text-lskin-primary/60 text-lg max-w-2xl mx-auto">
+            Discover our most loved products, designed for effectiveness and sustainability
           </p>
         </div>
-        
-        {/* Category Filters */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              className={`px-6 py-2 rounded-full font-medium transition-all ${
-                activeCategory === category.id
-                  ? 'bg-lskin-primary text-white'
-                  : 'bg-white text-lskin-primary border border-lskin-primary hover:bg-lskin-primary hover:text-white'
-              }`}
-              onClick={() => setActiveCategory(category.id)}
-            >
-              {category.name}
-            </button>
-          ))}
-        </div>
-        
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {products.map((product) => (
-            <ProductCard
+
+        {/* Two Products Side by Side */}
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 mb-20">
+          {featuredProducts.map((product, index) => (
+            <motion.div
               key={product.id}
-              name={product.name}
-              category={product.category}
-              price={product.price}
-              imageUrl={product.imageUrl}
-              isEco={product.isEco}
-            />
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="flex-1"
+            >
+              <div className="bg-white rounded-2xl overflow-hidden border border-lskin-primary/10 h-full flex flex-col">
+                
+                {/* Image */}
+                <div className="relative aspect-square overflow-hidden">
+                  <Image
+                    src={product.imageUrl}
+                    alt={product.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                    quality={85}
+                  />
+                  
+                  {/* Rating */}
+                  <div className="absolute top-4 left-4">
+                    <div className="inline-flex items-center gap-1 px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-full">
+                      <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                      <span className="text-sm font-medium">{product.rating}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Details */}
+                <div className="p-6 flex-1 flex flex-col">
+                  <div className="mb-4">
+                    <h3 className="font-playfair text-2xl text-lskin-primary font-light mb-2">
+                      {product.name}
+                    </h3>
+                    <p className="text-lskin-primary/60 text-sm">
+                      {product.tagline}
+                    </p>
+                  </div>
+
+                  {/* Features */}
+                  <div className="mb-6">
+                    <div className="flex flex-wrap gap-2">
+                      {product.features.map((feature, idx) => (
+                        <span
+                          key={idx}
+                          className="px-3 py-1 bg-lskin-primary/5 rounded-full text-xs text-lskin-primary"
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Price & CTA */}
+                  <div className="mt-auto pt-4 border-t border-lskin-primary/5">
+                    <div className="flex items-center justify-between">
+                      <span className="font-playfair text-2xl text-lskin-primary font-light">
+                        ${product.price.toFixed(2)}
+                      </span>
+                      {/* <Link
+                        href={createPageUrl(`ProductDetail?id=${product.id}`)}
+                        className="inline-flex items-center gap-2 px-4 py-2 border border-lskin-primary/20 rounded-full hover:border-lskin-primary hover:bg-lskin-primary/5 transition-colors"
+                      >
+                        <span className="text-sm">View Details</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Link> */}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
-        
+
+        {/* Simple CTA */}
         <div className="text-center">
-          <button className="btn-primary">
-            <i className="fas fa-store mr-2"></i> View All Products
-          </button>
+          {/* <Link
+            href={#('Products')}
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-lskin-primary text-white rounded-full hover:bg-lskin-primary/90 transition-colors"
+          >
+            <span className="text-sm font-medium tracking-wider">Explore Full Collection</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link> */}
         </div>
       </div>
     </section>
   );
-};
-
-export default ProductsSection;
+}
