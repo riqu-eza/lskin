@@ -1,54 +1,47 @@
-// components/FeaturedProductsGrid.jsx
 'use client';
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ShoppingBag, Heart,  Star, Sparkles } from 'lucide-react';
+import { ShoppingBag, Heart, Star, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 
 const FeaturedProductsGrid = ({ products = [] }) => {
-  const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
   const [wishlist, setWishlist] = useState<number[]>([]);
 
   const defaultProducts = [
     {
       id: 1,
       name: "Botanical Renewal Oil",
-      category: "Shear Butter",
+      category: "Shea Butter",
       price: 7800,
       rating: 4.9,
-      description: "Potent botanical extract serum for luminous skin",
-      image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&h=800&fit=crop",
+      image: "/_DSC2942.jpg",
       isBestSeller: true,
     },
     {
       id: 2,
       name: "Earth-Bound Cleansing Balm",
-      category: "Cocoaa Butter",
+      category: "Cocoa Butter",
       price: 5400,
       rating: 4.7,
-      description: "Gentle cleansing that transforms on contact",
-      image: "https://images.unsplash.com/photo-1556228578-9c360e1d8d34?w=800&h=800&fit=crop",
+      image: "/_DSC2971.jpg",
       isNew: true,
     },
     {
       id: 3,
       name: "Flora Hydrating Mist",
-      category: "TONER",
+      category: "Toner",
       price: 4200,
       rating: 4.8,
-      description: "Fine mist hydration with rose and hyaluronic acid",
-      image: "https://images.unsplash.com/photo-1591088398332-8a7791972843?w=800&h=800&fit=crop",
-      isVegan: true,
+      image: "/_DSC2959.jpg",
     },
     {
       id: 4,
       name: "Sculpting Jade Tool",
-      category: "BEAUTY TOOL",
+      category: "Beauty Tool",
       price: 3500,
       rating: 4.9,
-      description: "Handcrafted jade for facial massage",
-      image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&h=800&fit=crop",
+      image: "/_DSC2949.jpg",
       isLimited: true,
     },
   ];
@@ -64,191 +57,109 @@ const FeaturedProductsGrid = ({ products = [] }) => {
   };
 
   return (
-    <section className="py-12 bg-white border">
+    <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Modern Elegant Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <div className="w-20 h-px bg-lskin-secondary/30"></div>
-            <Sparkles className="w-5 h-5 text-lskin-secondary" />
-            <div className="w-20 h-px bg-lskin-secondary/30"></div>
-          </div>
-          
-         
-          
-          <p className="text-lg text-lskin-secondary font-montserrat max-w-2xl mx-auto leading-relaxed">
-Essentials    </p>
-        </motion.div>
+        {/* Minimal Header */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-light text-gray-900 text-center mb-3">
+            Top Products
+          </h2>
+          <p className="text-gray-500 text-center text-sm">
+            Essentials worth having
+          </p>
+        </div>
 
-        {/* Elegant Product Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        {/* Clean Product Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {displayProducts.map((product, index) => (
             <motion.div
               key={product.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              onMouseEnter={() => setHoveredProduct(product.id)}
-              onMouseLeave={() => setHoveredProduct(null)}
-              className="group relative"
+              transition={{ duration: 0.3, delay: index * 0.05 }}
+              className="group"
             >
-              {/* Product Card Container */}
-              <div className="relative overflow-hidden rounded-2xl bg-white border border-lskin-secondary/10 transition-all duration-500 group-hover:shadow-2xl group-hover:border-lskin-secondary/20">
-                {/* Image Container with Elegant Overlay */}
-                <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-lskin-bg/20 to-white">
+              {/* Product Card */}
+              <div className="relative">
+                {/* Image Container */}
+                <div className="relative aspect-square mb-4 bg-gray-50 overflow-hidden">
                   <Image
                     src={product.image}
                     alt={product.name}
                     fill
-                    className="object-cover transition-all duration-700 group-hover:scale-110"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     sizes="(max-width: 768px) 50vw, 25vw"
                   />
                   
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent"></div>
+                  {/* Minimal Badge */}
+                  {product.isBestSeller && (
+                    <div className="absolute top-3 left-3">
+                      <span className="px-2 py-1 bg-black text-white text-xs font-medium">
+                        Best Seller
+                      </span>
+                    </div>
+                  )}
                   
-                  {/* Badges */}
-                  <div className="absolute top-4 left-4 flex flex-col gap-2">
-                    {product.isBestSeller && (
-                      <span className="px-3 py-1.5 bg-lskin-primary text-white text-xs font-bold tracking-widest rounded-full">
-                        BESTSELLER
-                      </span>
-                    )}
-                    {product.isNew && (
-                      <span className="px-3 py-1.5 bg-white text-lskin-primary text-xs font-bold tracking-widest rounded-full border border-lskin-primary/20">
-                        NEW
-                      </span>
-                    )}
-                    {product.isVegan && (
-                      <span className="px-3 py-1.5 bg-lskin-secondary text-white text-xs font-bold tracking-widest rounded-full">
-                        BUTTER
-                      </span>
-                    )}
-                  </div>
-                  
-                  {/* Wishlist Button */}
+                  {/* Simple Wishlist Button */}
                   <button
                     onClick={() => toggleWishlist(product.id)}
-                    className={`absolute top-4 right-4 p-2 rounded-full backdrop-blur-sm transition-all duration-300 ${
-                      wishlist.includes(product.id)
-                        ? 'bg-white/90 text-rose-500'
-                        : 'bg-white/50 text-lskin-secondary hover:bg-white/80'
-                    }`}
+                    className="absolute top-3 right-3 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors"
                   >
                     <Heart
-                      className={`w-5 h-5 ${
-                        wishlist.includes(product.id) ? 'fill-current' : ''
+                      className={`w-4 h-4 ${
+                        wishlist.includes(product.id)
+                          ? 'fill-red-500 text-red-500'
+                          : 'text-gray-400'
                       }`}
                     />
                   </button>
                 </div>
 
                 {/* Product Info */}
-                <div className="p-6">
+                <div className="space-y-2">
                   {/* Category */}
-                  <div className="mb-3">
-                    <span className="text-xs text-lskin-secondary uppercase tracking-widest font-bold font-montserrat">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-gray-500 uppercase tracking-wide">
                       {product.category}
                     </span>
+                    <div className="flex items-center gap-1">
+                      <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                      <span className="text-xs text-gray-600">{product.rating}</span>
+                    </div>
                   </div>
 
                   {/* Product Name */}
-                  <h3 className="text-xl font-playfair font-bold text-lskin-text mb-3 line-clamp-1">
+                  <h3 className="font-medium text-gray-900 text-sm leading-tight">
                     {product.name}
                   </h3>
 
-                  {/* Description */}
-                  <p className="text-sm text-lskin-secondary font-montserrat mb-4 line-clamp-2 leading-relaxed">
-                    {product.description}
-                  </p>
-
-                  {/* Rating */}
-                  <div className="flex items-center gap-2 mb-5">
-                    <div className="flex">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`w-3 h-3 ${
-                            i < Math.floor(product.rating)
-                              ? 'fill-amber-400 text-amber-400'
-                              : 'text-lskin-secondary/30'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    <span className="text-xs text-lskin-secondary font-montserrat">
-                      {product.rating}
+                  {/* Price & Action */}
+                  <div className="flex items-center justify-between pt-2">
+                    <span className="text-lg font-medium text-gray-900">
+                      Ksh {product.price.toLocaleString()}
                     </span>
-                  </div>
-
-                  {/* Price & Add to Cart */}
-                  <div className="flex items-center justify-between pt-4 border-t border-lskin-secondary/10">
-                    <div>
-                      <span className="text-2xl font-playfair font-bold text-lskin-primary">
-                        Ksh{product.price}
-                      </span>
-                    </div>
-                    
-                    {/* Add to Cart Button - Elegant Slide Up */}
-                    <motion.button
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ 
-                        opacity: hoveredProduct === product.id ? 1 : 0,
-                        y: hoveredProduct === product.id ? 0 : 10
-                      }}
-                      className="flex items-center gap-2 px-4 py-2.5 bg-lskin-primary text-white text-sm font-medium rounded-lg hover:bg-lskin-text transition-all duration-300 group/btn"
-                    >
+                    <button className="flex items-center gap-2 px-4 py-2 bg-black text-white text-sm font-medium rounded hover:bg-gray-800 transition-colors">
                       <ShoppingBag className="w-4 h-4" />
-                      <span className="font-montserrat">Add</span>
-                    </motion.button>
-                    
-                    {/* Quick View Button (Always visible fallback) */}
-                    <button className="px-4 py-2.5 text-lskin-secondary text-sm font-medium hover:text-lskin-text transition-colors">
-                      View
+                      Add
                     </button>
                   </div>
                 </div>
               </div>
-
-              {/* Elegant Hover Effect */}
-              <div className="absolute inset-0 -z-10 bg-gradient-to-br from-lskin-primary/5 via-transparent to-lskin-secondary/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </motion.div>
           ))}
         </div>
 
-        {/* Modern View All Section */}
-        
+        {/* View All Link */}
+        <div className="mt-16 text-center">
+          <a
+            href="/products"
+            className="inline-flex items-center gap-2 text-gray-700 hover:text-black font-medium text-sm transition-colors"
+          >
+            View all products
+            <ChevronRight className="w-4 h-4" />
+          </a>
+        </div>
       </div>
-
-      <style jsx global>{`
-        .line-clamp-1 {
-          display: -webkit-box;
-          -webkit-line-clamp: 1;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-        
-        .line-clamp-2 {
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-        
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-5px); }
-        }
-        
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   );
 };

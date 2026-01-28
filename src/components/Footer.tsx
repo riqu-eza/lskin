@@ -1,7 +1,7 @@
 // components/FooterMinimalistCustomLogo.jsx (with logo color handling)
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 const FooterMinimalistCustomLogo = () => {
   return (
@@ -22,7 +22,7 @@ const FooterMinimalistCustomLogo = () => {
                 priority
               />
             </div>
-            
+
             {/* Method 2: If your SVG has transparent background */}
             {/*
             <div className="relative w-full h-full">
@@ -38,7 +38,7 @@ const FooterMinimalistCustomLogo = () => {
             </div>
             */}
           </div>
-          
+
           {/* Tagline */}
           <p className="text-sm text-[#F5F7DE]/70 text-center max-w-md mt-2 font-montserrat">
             Premium Organic Skincare
@@ -47,8 +47,8 @@ const FooterMinimalistCustomLogo = () => {
 
         {/* Links section */}
         <div className="flex flex-wrap justify-center gap-6 mb-12">
-          {['Shop', 'About', 'Ingredients', 'Sustainability', 'Contact'].map((item) => (
-            <Link 
+          {["Shop", "About", "Blog", "Contact"].map((item) => (
+            <Link
               key={item}
               href={`/${item.toLowerCase()}`}
               className="text-sm text-[#F5F7DE]/70 hover:text-[#F5F7DE] transition-colors duration-300 font-montserrat px-3 py-1 hover:bg-[#F5F7DE]/10 rounded-full"
@@ -81,6 +81,39 @@ const FooterMinimalistCustomLogo = () => {
               <span className="w-1.5 h-1.5 rounded-full bg-[#F5F7DE]/30"></span>
               Sustainable
             </span>
+          </div>
+        </div>
+        <div className="relative my-8">
+          <div className=" h-px bg-gradient-to-r from-transparent via-[#F5F7DE]/30 to-transparent mx-auto"></div>
+        </div>
+        <div className="flex flex-col items-center py-">
+          <div className="flex items-center gap-3">
+            <div className="w-px h-4 bg-gradient-to-b from-transparent via-[#F5F7DE]/30 to-transparent"></div>
+            <div className="flex items-center gap-2 text-sm">
+              <span className="text-[#F5F7DE]/60 font-montserrat">
+                Powered by
+              </span>
+              <a
+                href="https://dancahtechnology.co.ke/"
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                className="inline-flex items-center gap-1 text-[#F5F7DE] hover:text-white transition-colors duration-300 group"
+              >
+                <span className="font-medium">Dancah Dynamics</span>
+                <svg
+                  className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </a>
+            </div>
+            <div className="w-px h-4 bg-gradient-to-b from-transparent via-[#F5F7DE]/30 to-transparent"></div>
           </div>
         </div>
       </div>
